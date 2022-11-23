@@ -13,11 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+     - uses: actions/checkout@v2
+    
      - name: Build
         run:mvn --batch-mode -DskipTests package
       
      - name: Test
         run:mvn --batch-mode -Dmaven.test.failure.ignore=true test
+        
+     - name: Report
+        uses:dorny/test-reporter@v1
+        if:always()
+        with:name:Maven Tests
+          path:"**/test-results.trx"   
+          reporter:java-junit
+          fail-on-error:true
       
 
       
