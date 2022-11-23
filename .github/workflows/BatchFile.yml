@@ -11,11 +11,13 @@ jobs:
   build:
   
     runs-on: ubuntu-latest
-      - name:Build
-      run:mvn --batch-mode _DskipTests package
+    
+    steps:
+     - name: Build
+        run: mvn --batch-mode -DskipTests package
       
       - name:Test
-      run:mvn --batch-mode -Dmaven.test.failure.ignore=true test
+        run:mvn --batch-mode -Dmaven.test.failure.ignore=true test
       
 
       
